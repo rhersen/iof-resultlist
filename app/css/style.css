@@ -1,0 +1,14 @@
+body {
+    font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-weight: 100;
+    letter-spacing: 1px;
+}
+
+td {
+    border-top: solid #ddd 1pt;
+}
+
+caption {
+    background-color: #ddd;
+    font-weight: bold;
+}
