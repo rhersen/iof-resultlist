@@ -1,6 +1,8 @@
 tag = React.DOM
 
-getTime = (totalSeconds) ->
+getTime = (totalSeconds, status) ->
+  if status isnt 'OK'
+    return status
   seconds = totalSeconds % 60
   minutes = (totalSeconds - seconds) / 60
   if seconds < 10
@@ -9,10 +11,9 @@ getTime = (totalSeconds) ->
     minutes + ':' + seconds
 
 getPerson = (i, p) ->
-  seconds = $(p).find('Result > Time').text()
   name: $(p).find('Person Name Given').text() + ' ' + $(p).find('Person Name Family').text()
   position: $(p).find('Result > Position').text()
-  time: getTime(seconds)
+  time: getTime $(p).find('Result > Time').text(), $(p).find('Result > Status').text()
 
 window.getResult = (doc) ->
   result = {}

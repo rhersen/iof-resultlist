@@ -90,6 +90,77 @@ xml = '<?xml version="1.0" encoding="UTF-8"?>
        </SplitTime>
       </Result>
      </PersonResult>
+   <PersonResult>
+    <EntryId>2074756</EntryId>
+    <Person>
+     <Id>71000</Id>
+     <Name>
+      <Family>Agén</Family>
+      <Given>Lennart</Given>
+     </Name>
+    </Person>
+    <Organisation>
+     <Id>410</Id>
+     <Name>Tullinge Sportklubb</Name>
+     <ShortName>Tullinge SK</ShortName>
+     <Country code="SWE"></Country>
+    </Organisation>
+    <Result raceNumber="1">
+     <StartTime>2014-02-19T18:24:00+01:00</StartTime>
+     <FinishTime>2014-02-19T19:24:05+01:00</FinishTime>
+     <Status>MissingPunch</Status>
+     <Course>
+      <Id>10</Id>
+      <Name>KortaB</Name>
+      <Length>4430</Length>
+     </Course>
+     <SplitTime>
+      <ControlCode>45</ControlCode>
+      <Time>260.0</Time>
+     </SplitTime>
+     <SplitTime>
+      <ControlCode>44</ControlCode>
+      <Time>694.0</Time>
+     </SplitTime>
+     <SplitTime>
+      <ControlCode>40</ControlCode>
+      <Time>1113.0</Time>
+     </SplitTime>
+     <SplitTime>
+      <ControlCode>46</ControlCode>
+      <Time>1243.0</Time>
+     </SplitTime>
+     <SplitTime>
+      <ControlCode>47</ControlCode>
+     </SplitTime>
+     <SplitTime>
+      <ControlCode>40</ControlCode>
+      <Time>1430.0</Time>
+     </SplitTime>
+     <SplitTime>
+      <ControlCode>43</ControlCode>
+     </SplitTime>
+     <SplitTime>
+      <ControlCode>47</ControlCode>
+     </SplitTime>
+     <SplitTime>
+      <ControlCode>48</ControlCode>
+      <Time>2506.0</Time>
+     </SplitTime>
+     <SplitTime>
+      <ControlCode>49</ControlCode>
+      <Time>2826.0</Time>
+     </SplitTime>
+     <SplitTime>
+      <ControlCode>39</ControlCode>
+      <Time>2940.0</Time>
+     </SplitTime>
+     <SplitTime>
+      <ControlCode>31</ControlCode>
+      <Time>3362.0</Time>
+     </SplitTime>
+    </Result>
+   </PersonResult>
     </ClassResult>
     <ClassResult>
      <Class>
@@ -376,6 +447,7 @@ describe ".getResult", ->
   describe "name", ->
     Then ->
       expect(@result.Korta[0].name).toEqual 'Amanda Berggren'
+      expect(@result.Korta[1].name).toEqual 'Lennart Agén'
       expect(@result.Mellan[0].name).toEqual 'Olle Karlsson'
       expect(@result.Mellan[1].name).toEqual 'Hans Sundqvist'
       expect(@result['Långa'][0].name).toEqual 'Julian Dent'
@@ -388,7 +460,11 @@ describe ".getResult", ->
       expect(@result['Långa'][0].position).toEqual '1'
 
   describe "time", ->
-    Then ->
-      expect(@result.Korta[0].time).toEqual '51:40'
-      expect(@result.Mellan[0].time).toEqual '67:06'
+    describe "ok", ->
+      Then ->
+        expect(@result.Korta[0].time).toEqual '51:40'
+        expect(@result.Mellan[0].time).toEqual '67:06'
+    describe "status", ->
+      Then ->
+        expect(@result.Korta[1].time).toEqual 'MissingPunch'
 
