@@ -1,7 +1,7 @@
 tag = React.DOM
 
 getTime = (totalSeconds, status) ->
-  if status isnt 'OK'
+  if status and status isnt 'OK'
     return status
   seconds = totalSeconds % 60
   minutes = (totalSeconds - seconds) / 60
@@ -10,10 +10,15 @@ getTime = (totalSeconds, status) ->
   else
     minutes + ':' + seconds
 
-getPerson = (i, p) ->
-  name: $(p).find('Person Name Given').text() + ' ' + $(p).find('Person Name Family').text()
-  position: $(p).find('Result > Position').text()
-  time: getTime $(p).find('Result > Time').text(), $(p).find('Result > Status').text()
+getSplits = (splits) ->
+  $.makeArray (splits).map (i, split) -> getTime $(split).text()
+
+getPerson = (i, person) ->
+  p = $ person
+  name: p.find('Person Name Given').text() + ' ' + p.find('Person Name Family').text()
+  position: p.find('Result > Position').text()
+  time: getTime p.find('Result > Time').text(), p.find('Result > Status').text()
+  splits: getSplits p.find('Result > SplitTime > Time')
 
 window.getResult = (doc) ->
   result = {}
@@ -25,10 +30,10 @@ window.getResult = (doc) ->
 
 window.PersonResult = React.createClass
   render: ->
-    tag.tr {},
-      tag.td {}, @props.person.position
-      tag.td {}, @props.person.name
-      tag.td {}, @props.person.time
+    person = [ tag.td {}, @props.person.position, tag.td {}, @props.person.name ]
+    splits = @props.person.splits.map((split) -> tag.td {}, split)
+    time = [tag.td {}, @props.person.time]
+    tag.tr children: [].concat person, splits, time
 
 window.ClassResult = React.createClass
   render: ->

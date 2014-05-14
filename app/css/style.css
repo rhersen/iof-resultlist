@@ -1,11 +1,11 @@
 body {
-    font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-    font-weight: 100;
-    letter-spacing: 1px;
+    font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    /*font-size: 48px;*/
 }
 
 td {
     border-top: solid #ddd 1pt;
+    text-align: right;
 }
 
 caption {

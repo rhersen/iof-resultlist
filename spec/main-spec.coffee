@@ -468,3 +468,6 @@ describe ".getResult", ->
       Then ->
         expect(@result.Korta[1].time).toEqual 'MissingPunch'
 
+  describe "splits", ->
+    Then ->
+      expect(@result.Korta[0].splits).toContain '4:14'
