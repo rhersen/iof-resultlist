@@ -30,8 +30,8 @@ window.getResult = (doc) ->
 
 window.PersonResult = React.createClass
   render: ->
-    person = [ tag.td {}, @props.person.position, tag.td {}, @props.person.name ]
-    splits = @props.person.splits.map((split) -> tag.td {}, split)
+    person = [ tag.td {}, @props.person.position, tag.td {className: 'name'}, @props.person.name ]
+    splits = @props.person.splits.map((split) -> tag.td {className: 'split'}, split)
     time = [tag.td {}, @props.person.time]
     tag.tr children: [].concat person, splits, time
 
