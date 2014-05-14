@@ -161,7 +161,68 @@ xml = '<?xml version="1.0" encoding="UTF-8"?>
      </SplitTime>
     </Result>
    </PersonResult>
-    </ClassResult>
+   <PersonResult>
+    <EntryId>2077472</EntryId>
+    <Person>
+     <Id>7894</Id>
+     <Name>
+      <Family>Karlsson</Family>
+      <Given>Mats</Given>
+     </Name>
+    </Person>
+    <Organisation>
+     <Id>410</Id>
+     <Name>Tullinge Sportklubb</Name>
+     <ShortName>Tullinge SK</ShortName>
+     <Country code="SWE"></Country>
+    </Organisation>
+    <Result raceNumber="1">
+     <StartTime>2014-02-19T18:24:00+01:00</StartTime>
+     <Status>DidNotStart</Status>
+     <Course>
+      <Id>9</Id>
+      <Name>KortaA</Name>
+      <Length>4430</Length>
+     </Course>
+     <SplitTime>
+      <ControlCode>45</ControlCode>
+     </SplitTime>
+     <SplitTime>
+      <ControlCode>44</ControlCode>
+     </SplitTime>
+     <SplitTime>
+      <ControlCode>40</ControlCode>
+     </SplitTime>
+     <SplitTime>
+      <ControlCode>43</ControlCode>
+     </SplitTime>
+     <SplitTime>
+      <ControlCode>47</ControlCode>
+     </SplitTime>
+     <SplitTime>
+      <ControlCode>40</ControlCode>
+     </SplitTime>
+     <SplitTime>
+      <ControlCode>46</ControlCode>
+     </SplitTime>
+     <SplitTime>
+      <ControlCode>47</ControlCode>
+     </SplitTime>
+     <SplitTime>
+      <ControlCode>48</ControlCode>
+     </SplitTime>
+     <SplitTime>
+      <ControlCode>49</ControlCode>
+     </SplitTime>
+     <SplitTime>
+      <ControlCode>39</ControlCode>
+     </SplitTime>
+     <SplitTime>
+      <ControlCode>31</ControlCode>
+     </SplitTime>
+    </Result>
+   </PersonResult>
+   </ClassResult>
     <ClassResult>
      <Class>
       <Id>9991</Id>
@@ -448,6 +509,7 @@ describe ".getResult", ->
     Then ->
       expect(@result.Korta[0].name).toEqual 'Amanda Berggren'
       expect(@result.Korta[1].name).toEqual 'Lennart Agén'
+      expect(@result.Korta[2].name).toEqual 'Mats Karlsson'
       expect(@result.Mellan[0].name).toEqual 'Olle Karlsson'
       expect(@result.Mellan[1].name).toEqual 'Hans Sundqvist'
       expect(@result['Långa'][0].name).toEqual 'Julian Dent'
@@ -466,7 +528,8 @@ describe ".getResult", ->
         expect(@result.Mellan[0].time).toEqual '67:06'
     describe "status", ->
       Then ->
-        expect(@result.Korta[1].time).toEqual 'MissingPunch'
+        expect(@result.Korta[1].time).toEqual 'felst.'
+        expect(@result.Korta[2].time).toEqual 'dns'
 
   describe "splits", ->
     Then ->

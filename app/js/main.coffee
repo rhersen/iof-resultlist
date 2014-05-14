@@ -1,8 +1,8 @@
 tag = React.DOM
 
 getTime = (totalSeconds, status) ->
-  if status and status isnt 'OK'
-    return status
+  if status is 'MissingPunch' then return 'felst.'
+  if status is 'DidNotStart' then return 'dns'
   seconds = totalSeconds % 60
   minutes = (totalSeconds - seconds) / 60
   if seconds < 10
