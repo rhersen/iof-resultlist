@@ -1,8 +1,9 @@
 tag = React.DOM
 
-getTime = (totalSeconds, status) ->
+getTime = (totalSeconds, status = 'OK') ->
   if status is 'MissingPunch' then return 'felst.'
   if status is 'DidNotStart' then return 'dns'
+  if status isnt 'OK' then return status
   seconds = totalSeconds % 60
   minutes = (totalSeconds - seconds) / 60
   if seconds < 10
@@ -10,12 +11,15 @@ getTime = (totalSeconds, status) ->
   else
     minutes + ':' + seconds
 
+getSplit = (i, split) ->
+  getTime $(split).text()
+
 getSplits = (splits) ->
-  $.makeArray (splits).map (i, split) -> getTime $(split).text()
+  $.makeArray (splits).map getSplit
 
 getPerson = (i, person) ->
   p = $ person
-  name: p.find('Person Name Given').text() + ' ' + p.find('Person Name Family').text()
+  name: ['Given', 'Family'].map((field)-> p.find('Person > Name > ' + field).text()).join ' '
   position: p.find('Result > Position').text()
   time: getTime p.find('Result > Time').text(), p.find('Result > Status').text()
   splits: getSplits p.find('Result > SplitTime > Time')
