@@ -22,6 +22,10 @@ and (orientation: landscape) {
     td.split {
         display: table-cell;
     }
+
+    td.total {
+        font-weight: bold;
+    }
 }
 
 @media only screen

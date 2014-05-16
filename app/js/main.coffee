@@ -11,11 +11,13 @@ getTime = (totalSeconds, status = 'OK') ->
   else
     minutes + ':' + seconds
 
-getSplit = (i, split) ->
-  getTime $(split).text()
-
 getSplits = (splits) ->
-  $.makeArray (splits).map getSplit
+  intermediate = $.makeArray (splits).map (i, split) -> $(split).text()
+  prev = 0
+  intermediate.map (current) ->
+    seconds = current - prev
+    prev = current
+    getTime seconds
 
 getPerson = (i, person) ->
   p = $ person
@@ -36,16 +38,14 @@ window.PersonResult = React.createClass
   render: ->
     person = [ tag.td {}, @props.person.position, tag.td {className: 'name'}, @props.person.name ]
     splits = @props.person.splits.map((split) -> tag.td {className: 'split'}, split)
-    time = [tag.td {}, @props.person.time]
+    time = [tag.td {className: 'total'}, @props.person.time]
     tag.tr children: [].concat person, splits, time
 
 window.ClassResult = React.createClass
   render: ->
     tag.table {},
       tag.caption
-        children: [@props.name].concat @props.persons.map (person) ->
-          PersonResult
-            person: person
+        children: [@props.name].concat @props.persons.map (person) -> PersonResult person: person
 
 window.ReactRoot = React.createClass
   getInitialState: ->

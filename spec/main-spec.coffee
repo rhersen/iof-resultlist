@@ -533,4 +533,6 @@ describe ".getResult", ->
 
   describe "splits", ->
     Then ->
-      expect(@result.Korta[0].splits).toContain '4:14'
+      expect(@result.Korta[0].splits).toContain '2:05'
+      expect(@result.Korta[0].splits.length).toEqual 12
+      expect(@result.Korta[2].splits.length).toEqual 0
