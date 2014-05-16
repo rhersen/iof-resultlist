@@ -52,6 +52,9 @@ window.ReactRoot = React.createClass
     classes: []
 
   componentDidMount: ->
+    @getResults()
+
+  getResults: ->
     $.ajax
       url: 'result.xml'
       success: @setResult
@@ -60,8 +63,10 @@ window.ReactRoot = React.createClass
     @setState classes: getResult doc
 
   render: ->
+    updateButton = () => tag.button {onClick: @getResults}, 'Uppdatera'
+    classes = _.map @state.classes, (value, key) ->
+      ClassResult
+        name: key
+        persons: value
     tag.div {},
-      children: _.map @state.classes, (value, key) ->
-        ClassResult
-          name: key
-          persons: value
+      children: [updateButton()].concat classes, [updateButton()]
